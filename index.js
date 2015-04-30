@@ -20,7 +20,7 @@ baseModule.service('TodoModel', function(){
   }
 });
 
-baseModule.controller('baseController', ['$scope', 'TodoModel', function($scope, TodoModel){
+baseModule.controller('baseController', ['TodoModel', function(TodoModel){
   this.todoList = TodoModel.getList();
 
   this.newTodo = null;
