@@ -6,7 +6,7 @@
 // declare a module
 var baseModule = angular.module('clari', []);
 
-baseModule.controller('baseController', ['$scope', function($scope){
+baseModule.service('TodoModel', function(){
   this.todoList = [
     {
       value: "work to be done"
@@ -15,6 +15,13 @@ baseModule.controller('baseController', ['$scope', function($scope){
       value: "test sample here"
     }
   ];
+  this.getList = function () {
+    return this.todoList;
+  }
+});
+
+baseModule.controller('baseController', ['$scope', 'TodoModel', function($scope, TodoModel){
+  this.todoList = TodoModel.getList();
 
   this.newTodo = null;
 
