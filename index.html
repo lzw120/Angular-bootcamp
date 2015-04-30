@@ -8,8 +8,17 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.0/angular.min.js" type="text/javascript"></script>
   <script src="index.js"></script>
 </head>
-<body ng-app="clari">
+<body ng-app="clari" ng-controller="baseController as base">
   <div> 1 + 2 equals: {{1 + 2}}</div>
-  test hello
+
+  <div>
+    <input type="text" ng-model="base.newTodo">
+  </div>
+  <button ng-click="base.addTodo()">Submit</button>
+  <div ng-repeat="todo in base.todoList">
+    {{todo.value}}
+  </div>
+
+
 </body>
 </html>
