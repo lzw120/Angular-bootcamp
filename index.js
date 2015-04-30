@@ -6,22 +6,26 @@
 // declare a module
 var baseModule = angular.module('clari', []);
 
-baseModule.service('TodoModel', function(){
-  this.todoList = [
-    {
-      value: "work to be done"
-    },
-    {
-      value: "test sample here"
-    }
-  ];
-  this.getList = function () {
-    return this.todoList;
+baseModule.service('TodoModel', ['$http', function($http){
+  this.getList = function (callback) {
+    $http.get("todo.json")
+      .success(function(data){
+        callback(data);
+      }.bind(this))
+      .error(function(data){
+        console.log(data);
+      }.bind(this));
   }
-});
+
+}]);
 
 baseModule.controller('baseController', ['TodoModel', function(TodoModel){
-  this.todoList = TodoModel.getList();
+
+  this.listFetched = function(list) {
+    this.todoList = list;
+  };
+
+  TodoModel.getList(this.listFetched.bind(this));
 
   this.newTodo = null;
 
